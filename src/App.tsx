@@ -1,44 +1,92 @@
-import React from 'react';
-import { Stack, Text, Link, FontWeights, IStackTokens, IStackStyles, ITextStyles } from '@fluentui/react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { BrowserRouter, Route as BrowserRoute, Switch } from "react-router-dom";
+import { ProgressIndicator, styled } from "@fluentui/react";
+import { get, isArray, isNil, flattenDeep, join } from "lodash";
+import { AutoSwitchLayout } from "./components/layout/AutoSwitchLayout";
+import {
+  AuthorizedRoute,
+  RouteIndexList,
+  ComingSoon,
+  NoMatch,
+} from "./components/route/AllRoutes";
+import { hierarchize, Node } from "./global/hierarchical";
+import { routes } from "./routes";
 
-const boldStyle: Partial<ITextStyles> = { root: { fontWeight: FontWeights.semibold } };
-const stackTokens: IStackTokens = { childrenGap: 15 };
-const stackStyles: Partial<IStackStyles> = {
-  root: {
-    width: '960px',
-    margin: '0 auto',
-    textAlign: 'center',
-    color: '#605e5c',
-  },
-};
+const keyName = "key";
+const pathName = "path";
+const uniqueKeyName = "uniqueKey";
 
-export const App: React.FunctionComponent = () => {
-  return (
-    <Stack horizontalAlign="center" verticalAlign="center" verticalFill styles={stackStyles} tokens={stackTokens}>
-      <img className="App-logo" src={logo} alt="logo" />
-      <Text variant="xxLarge" styles={boldStyle}>
-        Welcome to your Fluent UI app
-      </Text>
-      <Text variant="large">For a guide on how to customize this project, check out the Fluent UI documentation.</Text>
-      <Text variant="large" styles={boldStyle}>
-        Essential links
-      </Text>
-      <Stack horizontal tokens={stackTokens} horizontalAlign="center">
-        <Link href="https://developer.microsoft.com/en-us/fluentui#/get-started/web">Docs</Link>
-        <Link href="https://stackoverflow.com/questions/tagged/office-ui-fabric">Stack Overflow</Link>
-        <Link href="https://github.com/microsoft/fluentui/">Github</Link>
-        <Link href="https://twitter.com/fluentui">Twitter</Link>
-      </Stack>
-      <Text variant="large" styles={boldStyle}>
-        Design system
-      </Text>
-      <Stack horizontal tokens={stackTokens} horizontalAlign="center">
-        <Link href="https://developer.microsoft.com/en-us/fluentui#/styles/web/icons">Icons</Link>
-        <Link href="https://developer.microsoft.com/en-us/fluentui#/styles/web">Styles</Link>
-        <Link href="https://aka.ms/themedesigner">Theme designer</Link>
-      </Stack>
-    </Stack>
+function generateRoutePath(node: { [x: string]: any }, parent: any) {
+  const parentUniqueKey = get(parent, uniqueKeyName);
+  const uniqueKey = parentUniqueKey
+    ? parentUniqueKey + "." + node[keyName]
+    : node[keyName];
+
+  const parentPath = get(parent, pathName, "");
+  const routePath = get(
+    node,
+    pathName,
+    join([parentPath, node[keyName]], "/"),
+  ).replace(/\/+/g, "/");
+
+  node[uniqueKeyName] = uniqueKey;
+  node[pathName] = routePath;
+}
+
+function renderRoute(route: Node): React.ReactNode[] {
+  const isGroup = isArray(route.children);
+  const PageComponent = isNil(route.component)
+    ? isGroup
+      ? RouteIndexList
+      : ComingSoon
+    : route.component;
+
+  const routeComponent = (
+    <AuthorizedRoute
+      id={route.key}
+      key={route.uniqueKey}
+      path={route.path}
+      exact={route.exact || isArray(route.children)}
+      strict={route.strict}
+      isPublic={route.isPublic}
+    >
+      <PageComponent route={route} />
+    </AuthorizedRoute>
   );
-};
+
+  const childComponents: React.ReactNode[] = isGroup
+    ? route.children?.map(renderRoute) || []
+    : [];
+
+  return [routeComponent, ...childComponents];
+}
+
+function App({ theme }: { theme: any }) {
+  const { semanticColors } = theme;
+  React.useLayoutEffect(() => {
+    document.body.style.backgroundColor = semanticColors.bodyBackground;
+    document.body.style.color = semanticColors.bodyText;
+  }, [semanticColors]);
+
+  const routeList = hierarchize(routes, undefined, generateRoutePath);
+  const routeComponents = renderRoute(routeList);
+  const flatRouteComponents = flattenDeep(routeComponents);
+
+  return (
+    <BrowserRouter basename="/fluentui-starter">
+      <AutoSwitchLayout>
+        <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
+          <Switch>
+            <>{flatRouteComponents}</>
+            <BrowserRoute path="*">
+              <NoMatch />
+            </BrowserRoute>
+          </Switch>
+        </Suspense>
+      </AutoSwitchLayout>
+    </BrowserRouter>
+  );
+}
+
+// @ts-ignore Don't provide baseStyle
+export default styled(App);
