@@ -6,30 +6,30 @@ import { findNode, getParents } from "../../../global/hierarchical";
 import { routes, Route } from "../../../routes";
 import { NavToggler } from "./Nav/NavToggler";
 
-function findRoute(pathname: string) {
+const findRoute = (pathname: string) => {
   const current = findNode(routes, (route) => {
     const match = matchPath(pathname, route.path);
     return !!match?.isExact;
   });
   const paths = current ? getParents(current) : [];
   return { current, paths };
-}
+};
 
-function isVisible(route: Route) {
+const isVisible = (route: Route) => {
   return route.isHidden !== true;
-}
+};
 
-function hasChildren(route: Route) {
+const hasChildren = (route: Route) => {
   return route?.children?.filter(isVisible).length;
-}
+};
 
-export function Sidebar() {
+export const Sidebar = () => {
   const history = useHistory();
   const { pathname } = useLocation();
 
   const { current, paths } = findRoute(pathname);
 
-  function mapRouteToNavLink(route: Route, deeply = true): any {
+  const mapRouteToNavLink = (route: Route, deeply = true): any => {
     return {
       name: route.name,
       key: route.uniqueKey,
@@ -57,7 +57,7 @@ export function Sidebar() {
         ? "DocumentSet"
         : "TextDocument",
     };
-  }
+  };
 
   const homeLink = mapRouteToNavLink(routes, false);
   const topPageLinks =
@@ -100,10 +100,5 @@ export function Sidebar() {
     ...groupLinks,
   ];
 
-  return (
-    <NavToggler
-      groups={navLinkGroups}
-      selectedKey={current?.uniqueKey}
-    />
-  );
-}
+  return <NavToggler groups={navLinkGroups} selectedKey={current?.uniqueKey} />;
+};

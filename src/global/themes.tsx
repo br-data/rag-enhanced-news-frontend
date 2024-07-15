@@ -21,10 +21,16 @@ export const ThemeContext = React.createContext<ThemeContextType>({
 
 export const useTheme = () => React.useContext(ThemeContext);
 
-function ThemeConsumer({ children }: { children: React.ReactNode }) {
+interface ThemeConsumerProps {
+  children: React.ReactNode;
+}
+
+const ThemeConsumer: React.FunctionComponent<ThemeConsumerProps> = ({
+  children,
+}) => {
   const { theme } = useTheme();
   return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>;
-}
+};
 
 export const DynamicThemeProvider: React.FunctionComponent = ({ children }) => {
   const [theme, setTheme] = useLocalStorage("theme", "default");

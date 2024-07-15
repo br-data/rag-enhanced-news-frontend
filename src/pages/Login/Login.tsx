@@ -40,7 +40,15 @@ const demoUsers = [
 
 const getClassNames = classNamesFunction();
 
-function LoginForm({ theme, styles }: { theme: any; styles: any }) {
+interface LoginFormProps {
+  theme: Theme;
+  styles: any;
+}
+
+export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
+  theme,
+  styles,
+}) => {
   const { isAuthenticated, login, logout } = useAuthentication();
   const {
     handleSubmit,
@@ -65,22 +73,20 @@ function LoginForm({ theme, styles }: { theme: any; styles: any }) {
       .catch(setError);
   };
 
-  function getErrorMessage(name: string) {
+  const getErrorMessage = (name: string) => {
     const errorMessage = get(errors, name + ".message");
     return errorMessage ? errorMessage.toString() : undefined;
-  }
+  };
 
-  const classNames: IStyleSetBase | undefined = getClassNames(styles, {
+  const classNames: IStyleSetBase = getClassNames(styles, {
     theme,
-  }) as IStyleSetBase;
+  });
 
   return (
     <Stack className={classNames.root}>
       {isAuthenticated && (
         <Stack tokens={{ childrenGap: "1em" }}>
-          <h3 className={classNames.title}>
-            You are already signed in.
-          </h3>
+          <h3 className={classNames.title}>You are already signed in.</h3>
           <Stack horizontal tokens={{ childrenGap: "1em" }}>
             <PrimaryButton
               onClick={() => history.push("/")}
@@ -182,15 +188,15 @@ function LoginForm({ theme, styles }: { theme: any; styles: any }) {
       )}
     </Stack>
   );
-}
+};
 
-function remoteAuthService({
+const remoteAuthService = ({
   username,
   password,
 }: {
   username: string;
   password: string;
-}) {
+}) => {
   const found = demoUsers.find(
     (user) => username.toLocaleLowerCase() === user.username,
   );
@@ -205,9 +211,9 @@ function remoteAuthService({
   } else {
     return Promise.reject("Incorrect username or password");
   }
-}
+};
 
-function getStyles({ theme }: { theme: Theme }) {
+const getStyles = ({ theme }: { theme: Theme }) => {
   return {
     root: {
       margin: "10em auto",
@@ -221,6 +227,6 @@ function getStyles({ theme }: { theme: Theme }) {
       marginTop: 0,
     },
   };
-}
+};
 
 export default styled(LoginForm, getStyles);

@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  Stack,
-  styled,
-  classNamesFunction,
-  IProcessedStyleSet,
-} from "@fluentui/react";
+import { Stack, styled, classNamesFunction, Theme } from "@fluentui/react";
 import { IStyleSetBase } from "@fluentui/merge-styles";
 
 import { ThemeToggle } from "../../../global/themes";
 import { UserMenu } from "./UserMenu";
 
-const getStyles = ({ theme }: { theme: any }) => {
+const getStyles = ({ theme }: { theme: Theme }) => {
   return {
     root: {
       borderBottomStyle: "solid",
@@ -33,9 +28,7 @@ const TopMenuComponent: React.FunctionComponent<TopMenuComponentProps> = ({
   styles,
   theme,
 }) => {
-  const classNames: IProcessedStyleSet<IStyleSetBase> & {
-    root?: string;
-  } = getClassNames(styles, { theme });
+  const classNames: IStyleSetBase = getClassNames(styles, { theme });
 
   return (
     <Stack

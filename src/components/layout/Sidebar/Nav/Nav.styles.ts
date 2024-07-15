@@ -1,6 +1,6 @@
-import { AnimationClassNames, getFocusStyle } from "@fluentui/react";
+import { AnimationClassNames, getFocusStyle, Theme } from "@fluentui/react";
 
-export function getStyles({
+export const getStyles = ({
   isSelected,
   hasChildren,
   nestingLevel,
@@ -17,8 +17,8 @@ export function getStyles({
   scrollTop: number;
   isChildLinkSelected: boolean;
   hasGroupName: boolean;
-  theme: any;
-}) {  
+  theme: Theme;
+}) => {
   const { semanticColors, fonts } = theme;
 
   const navFontSize = fonts.medium.fontSize;
@@ -240,4 +240,4 @@ export function getStyles({
       },
     ],
   };
-}
+};

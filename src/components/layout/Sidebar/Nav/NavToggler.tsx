@@ -2,7 +2,6 @@ import React from "react";
 import {
   styled,
   classNamesFunction,
-  IProcessedStyleSet,
   FocusZone,
   FocusZoneDirection,
   Theme,
@@ -51,10 +50,10 @@ class NavTogglerComponent extends React.Component<
       return null;
     }
 
-    const classNames: IStyleSetBase | undefined = getClassNames(styles, {
+    const classNames: IStyleSetBase = getClassNames(styles, {
       isCollapsed: isNavCollapsed,
       theme: theme,
-    }) as IStyleSetBase;
+    });
 
     const toggleNavGroups = groups.filter(
       (navGroup: { groupType: string }) =>
@@ -118,13 +117,7 @@ class NavTogglerComponent extends React.Component<
       return null;
     }
 
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navToggler?: string;
-      navItemNameColumn?: string;
-      navItemIconColumn?: string;
-      navItemBarMarker?: string;
-      focusedStyle?: string;
-    } = getClassNames(styles, { theme: theme });
+    const classNames: IStyleSetBase = getClassNames(styles, { theme: theme });
     const ariaLabel = isNavCollapsed ? link.name : link.alternateText;
 
     return (

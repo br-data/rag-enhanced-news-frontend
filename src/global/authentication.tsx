@@ -12,11 +12,13 @@ const STOREGE_KEY = "authentication";
 
 export const AuthenticationContext = React.createContext(defaultValues);
 
-export function AuthenticationProvider({
-  children,
-}: {
+interface AuthenticationProviderProps {
   children: React.ReactNode;
-}) {
+}
+
+export const AuthenticationProvider: React.FunctionComponent<
+  AuthenticationProviderProps
+> = ({ children }) => {
   const [authentication, setAuthentication] = useSessionStorage(
     STOREGE_KEY,
     defaultValues,
@@ -34,8 +36,8 @@ export function AuthenticationProvider({
       {children}
     </AuthenticationContext.Provider>
   );
-}
+};
 
-export function useAuthentication() {
+export const useAuthentication = () => {
   return React.useContext(AuthenticationContext);
-}
+};

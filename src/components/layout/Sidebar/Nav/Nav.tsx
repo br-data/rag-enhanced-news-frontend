@@ -3,7 +3,6 @@ import {
   AnimationClassNames,
   classNamesFunction,
   styled,
-  IProcessedStyleSet,
 } from "@fluentui/react";
 import { IStyleSetBase } from "@fluentui/merge-styles";
 
@@ -96,13 +95,7 @@ class NavComponent extends NavBase {
     const isSelected =
       (isLinkSelected && !hasChildren) ||
       (isChildLinkSelected && !link.isExpanded);
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navItemRoot?: string;
-      navItemNameColumn?: string;
-      navItemIconColumn?: string;
-      navItemBarMarker?: string;
-      focusedStyle?: string;
-    } = getClassNames(styles, {
+    const classNames: IStyleSetBase = getClassNames(styles, {
       isSelected,
       nestingLevel,
       isChildLinkSelected,
@@ -207,11 +200,10 @@ class NavComponent extends NavBase {
 
     const hasGroupName = !!group.name;
 
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navGroupSeparatorRoot?: string;
-      navGroupSeparatorHrLine?: string;
-      navGroupSeparatorHeaderGroupName?: string;
-    } = getClassNames(styles, { hasGroupName, theme });
+    const classNames: IStyleSetBase = getClassNames(styles, {
+      hasGroupName,
+      theme,
+    });
 
     // first group header is hidden by default, display group header for other groups only if there are visible links
     let isGroupHeaderVisible = false;

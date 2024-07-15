@@ -8,13 +8,13 @@ export interface Node {
 
 export type NodeProcessor = (node: Node, parent: Node | undefined) => void;
 
-export function hierarchize(
+export const hierarchize = (
   node: Node,
   parent: Node | undefined,
   nodeProcessor: NodeProcessor,
   childrenKey: string = "children",
   parentKey: string = "parent",
-): Node {
+): Node => {
   node[parentKey] = parent;
   nodeProcessor && nodeProcessor(node, parent);
   if (isArray(node[childrenKey])) {
@@ -23,23 +23,23 @@ export function hierarchize(
     );
   }
   return node as Node;
-}
+};
 
-export function getParents(
+export const getParents = (
   node: Node,
   parents: Node[] = [],
   parentKey: string = "parent",
-): Node[] {
+): Node[] => {
   const nodes = [node, ...parents];
   if (node[parentKey]) return getParents(node[parentKey], nodes, parentKey);
   return nodes;
-}
+};
 
-export function findNode(
+export const findNode = (
   node: Node,
   matcher: (node: Node) => boolean,
   childrenKey: string = "children",
-): Node | null {
+): Node | null => {
   if (matcher(node)) return node;
   else if (node[childrenKey]) {
     for (let child of node[childrenKey]) {
@@ -48,4 +48,4 @@ export function findNode(
     }
   }
   return null;
-}
+};

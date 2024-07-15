@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route as BrowserRoute, Switch } from "react-router-dom";
-import { ProgressIndicator, styled } from "@fluentui/react";
+import { ProgressIndicator, styled, Theme } from "@fluentui/react";
 import { get, isArray, isNil, flattenDeep, join } from "lodash";
 import { AutoSwitchLayout } from "./components/layout/AutoSwitchLayout";
 import {
@@ -16,7 +16,7 @@ const keyName = "key";
 const pathName = "path";
 const uniqueKeyName = "uniqueKey";
 
-function generateRoutePath(node: { [x: string]: any }, parent: any) {
+const generateRoutePath = (node: Node, parent?: Node) => {
   const parentUniqueKey = get(parent, uniqueKeyName);
   const uniqueKey = parentUniqueKey
     ? parentUniqueKey + "." + node[keyName]
@@ -31,9 +31,9 @@ function generateRoutePath(node: { [x: string]: any }, parent: any) {
 
   node[uniqueKeyName] = uniqueKey;
   node[pathName] = routePath;
-}
+};
 
-function renderRoute(route: Node): React.ReactNode[] {
+const renderRoute = (route: Node): React.ReactNode[] => {
   const isGroup = isArray(route.children);
   const PageComponent = isNil(route.component)
     ? isGroup
@@ -59,9 +59,13 @@ function renderRoute(route: Node): React.ReactNode[] {
     : [];
 
   return [routeComponent, ...childComponents];
+};
+
+interface AppProps {
+  theme: Theme;
 }
 
-function App({ theme }: { theme: any }) {
+const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const { semanticColors } = theme;
   React.useLayoutEffect(() => {
     document.body.style.backgroundColor = semanticColors.bodyBackground;
@@ -86,7 +90,6 @@ function App({ theme }: { theme: any }) {
       </AutoSwitchLayout>
     </BrowserRouter>
   );
-}
+};
 
-// @ts-ignore Don't provide baseStyle
-export default styled(App);
+export default styled(App as any, {});

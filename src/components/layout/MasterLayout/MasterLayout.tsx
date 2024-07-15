@@ -3,7 +3,6 @@ import {
   Stack,
   styled,
   classNamesFunction,
-  IProcessedStyleSet,
   Theme,
 } from "@fluentui/react";
 import { IStyleSetBase } from "@fluentui/merge-styles";
@@ -32,11 +31,7 @@ interface MasterLayoutComponentProps {
 const MasterLayoutComponent: React.FunctionComponent<
   MasterLayoutComponentProps
 > = ({ children, theme, styles }) => {
-  const classNames: IProcessedStyleSet<IStyleSetBase> & {
-    root?: string;
-    sidebar?: string;
-    contentWrapper?: string;
-  } = getClassNames(styles, { theme });
+  const classNames: IStyleSetBase = getClassNames(styles, { theme });
 
   return (
     <Stack horizontal className={classNames.root}>

@@ -3,7 +3,7 @@ import { CommandBarButton } from "@fluentui/react";
 import { useAuthentication } from "../../../global/authentication";
 import { useHistory } from "react-router-dom";
 
-export function UserMenu() {
+export const UserMenu: React.FunctionComponent = () => {
   const { principal, logout } = useAuthentication();
 
   const history = useHistory();
@@ -34,4 +34,4 @@ export function UserMenu() {
       {principal.username}
     </CommandBarButton>
   );
-}
+};

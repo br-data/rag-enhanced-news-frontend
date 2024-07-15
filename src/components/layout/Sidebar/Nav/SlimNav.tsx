@@ -2,7 +2,6 @@ import React, { ComponentClass } from "react";
 import {
   styled,
   classNamesFunction,
-  IProcessedStyleSet,
 } from "@fluentui/react";
 import { IStyleSetBase } from "@fluentui/merge-styles";
 
@@ -137,14 +136,7 @@ class SlimNavComponent extends NavBase {
     const isSelected =
       nestingLevel > 0 &&
       this.isLinkSelected(link, false /* includeChildren */);
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navFloatingItemRoot?: string;
-      navItemRoot?: string;
-      navItemNameColumn?: string;
-      navItemIconColumn?: string;
-      navItemBarMarker?: string;
-      focusedStyle?: string;
-    } = getClassNames(styles, {
+    const classNames: IStyleSetBase = getClassNames(styles, {
       isSelected,
       nestingLevel,
       theme: theme,
@@ -220,9 +212,7 @@ class SlimNavComponent extends NavBase {
     }
 
     const hasChildren = link.links?.length;
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navFloatingRoot?: string;
-    } = getClassNames(styles, {
+    const classNames: IStyleSetBase = getClassNames(styles, {
       hasChildren,
       scrollTop: link.scrollTop,
       theme: theme,
@@ -244,13 +234,7 @@ class SlimNavComponent extends NavBase {
 
     const isSelected = this.isLinkSelected(link, true /* includeChildren */);
     const hasChildren = link.links?.length;
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navSlimItemRoot?: string;
-      navItemRoot?: string;
-      navItemIconColumn?: string;
-      navItemBarMarker?: string;
-      focusedStyle?: string;
-    } = getClassNames(styles, {
+    const classNames: IStyleSetBase = getClassNames(styles, {
       isSelected,
       hasChildren,
 
@@ -328,10 +312,7 @@ class SlimNavComponent extends NavBase {
       return null;
     }
 
-    const classNames: IProcessedStyleSet<IStyleSetBase> & {
-      navGroupSeparatorRoot?: string;
-      navGroupSeparatorHrLine?: string;
-    } = getClassNames(styles, { theme: theme });
+    const classNames: IStyleSetBase = getClassNames(styles, { theme: theme });
 
     let isGroupHeaderVisible = false;
 
