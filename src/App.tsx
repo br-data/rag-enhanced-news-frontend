@@ -77,7 +77,7 @@ const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const flatRouteComponents = flattenDeep(routeComponents);
 
   return (
-    <BrowserRouter basename="/fluentui-starter">
+    <BrowserRouter basename="/">
       <AutoSwitchLayout>
         <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
           <Switch>
