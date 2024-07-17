@@ -13,11 +13,16 @@ export type Route = {
 };
 
 export const routes: Route = {
-  key: "home",
-  name: "Home",
+  // key: "home",
+  // name: "Home",
+  // icon: "Home",
+  // path: "/",
+  // component: React.lazy(() => import("./pages/Dashboard/Dashboard")),
+  key: "overview",
+  name: "Overview",
   icon: "Home",
   path: "/",
-  component: React.lazy(() => import("./pages/Dashboard/Dashboard")),
+  component: React.lazy(() => import("./pages/DataList/DataList")),
   children: [
     {
       key: "login",
@@ -32,40 +37,41 @@ export const routes: Route = {
       isHidden: true,
     },
     {
-      key: "order",
-      name: "Order",
+      key: "wires",
+      name: "News Wires",
       icon: "visualizeApp",
       children: [
         {
-          key: "purchase-order",
-          name: "Purchase Order",
+          key: "world",
+          name: "World",
           component: React.lazy(() => import("./pages/DataList/DataList")),
         },
         {
-          key: "sales-order",
-          name: "Sales Order",
+          key: "germany",
+          name: "Germany",
+          component: React.lazy(() => import("./pages/DataList/DataList")),
+        },
+        {
+          key: "bavaria",
+          name: "Bavaria",
+          component: React.lazy(() => import("./pages/DataList/DataList")),
         },
       ],
     },
     {
-      key: "mangement",
-      name: "System Management",
+      key: "profiles",
+      name: "Profiles",
       icon: "managementApp",
       children: [
         {
-          key: "organization",
-          name: "Organization",
+          key: "prompts",
+          name: "Prompts",
           icon: "Org",
         },
         {
-          key: "user",
-          name: "User",
+          key: "personas",
+          name: "Personas",
           icon: "People",
-        },
-        {
-          key: "authority",
-          name: "Authority",
-          icon: "SecurityGroup",
         },
         {
           key: "settings",

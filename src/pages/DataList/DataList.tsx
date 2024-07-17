@@ -13,51 +13,56 @@ import {
   IDetailsColumnRenderTooltipProps,
 } from "@fluentui/react";
 
+// created_at
+// article_html
+// geosubject_names
+// headline
+// subhead
+// teaser
+// urgency
+
 const columns = [
   {
-    key: "orderNumber",
-    name: "Order Number",
-    fieldName: "orderNumber",
+    key: "created_at",
+    name: "Date",
+    fieldName: "created_at",
     minWidth: 50,
     maxWidth: 100,
   },
   {
-    key: "orderDate",
-    name: "Order Date",
-    fieldName: "orderDate",
+    key: "headline",
+    name: "Headline",
+    fieldName: "headline",
     minWidth: 100,
     maxWidth: 200,
   },
   {
-    key: "supplier",
-    name: "Supplier",
-    fieldName: "supplier",
+    key: "teaser",
+    name: "Teaser",
+    fieldName: "teaser",
     minWidth: 100,
     maxWidth: 200,
-    isResizable: true,
   },
   {
-    key: "product",
-    name: "Product",
-    fieldName: "product",
+    key: "geosubject_names",
+    name: "Location",
+    fieldName: "geosubject_names",
     minWidth: 100,
     maxWidth: 200,
-    isResizable: true,
   },
   {
-    key: "productQty",
-    name: "Quantity",
-    fieldName: "productQty",
+    key: "teaser",
+    name: "Teaser",
+    fieldName: "teaser",
+    minWidth: 100,
+    maxWidth: 200,
+  },
+  {
+    key: "urgency",
+    name: "Urgency",
+    fieldName: "urgency",
     minWidth: 50,
     maxWidth: 100,
-    isResizable: true,
-  },
-  {
-    key: "remark",
-    name: "Remark",
-    fieldName: "remark",
-    minWidth: 200,
-    maxWidth: 300,
     isResizable: true,
   },
 ];
