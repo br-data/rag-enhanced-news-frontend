@@ -12,14 +12,7 @@ import {
   IDetailsHeaderProps,
   IDetailsColumnRenderTooltipProps,
 } from "@fluentui/react";
-
-// created_at
-// article_html
-// geosubject_names
-// headline
-// subhead
-// teaser
-// urgency
+import { useHistory } from "react-router-dom"; // Assuming you're using react-router
 
 const columns = [
   {
@@ -51,13 +44,6 @@ const columns = [
     maxWidth: 200,
   },
   {
-    key: "teaser",
-    name: "Teaser",
-    fieldName: "teaser",
-    minWidth: 100,
-    maxWidth: 200,
-  },
-  {
     key: "urgency",
     name: "Urgency",
     fieldName: "urgency",
@@ -83,7 +69,13 @@ const classNames = mergeStyleSets({
   },
 });
 
-const DataList: React.FunctionComponent = (props) => {
+const DataList: React.FunctionComponent = () => {
+  const history = useHistory();
+
+  const handleRowClick = (item: any) => {
+    history.push(`/wires/details/${item.id}`);
+  };
+
   const onRenderDetailsHeader: IRenderFunction<IDetailsHeaderProps> = (
     props,
     defaultRender,
@@ -105,7 +97,7 @@ const DataList: React.FunctionComponent = (props) => {
 
   return (
     <div>
-      <h1 className={classNames.header}>Purchase List</h1>
+      <h1 className={classNames.header}>All News Wires</h1>
       <DetailsList
         styles={gridStyles}
         items={items}
@@ -113,11 +105,12 @@ const DataList: React.FunctionComponent = (props) => {
         checkboxVisibility={CheckboxVisibility.always}
         layoutMode={DetailsListLayoutMode.fixedColumns}
         constrainMode={ConstrainMode.unconstrained}
-        selectionMode={SelectionMode.multiple}
+        selectionMode={SelectionMode.none}
         onRenderDetailsHeader={onRenderDetailsHeader}
         selectionPreservedOnEmptyClick
         ariaLabelForSelectionColumn="Toggle selection"
         ariaLabelForSelectAllCheckbox="Toggle selection for all items"
+        onItemInvoked={handleRowClick}
       />{" "}
     </div>
   );

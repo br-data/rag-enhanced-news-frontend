@@ -42,6 +42,12 @@ export const routes: Route = {
       icon: "visualizeApp",
       children: [
         {
+          key: "details/:id",
+          name: "Details",
+          component: React.lazy(() => import("./pages/Details/Details")),
+          isHidden: true,
+        },
+        {
           key: "world",
           name: "World",
           component: React.lazy(() => import("./pages/DataList/DataList")),
