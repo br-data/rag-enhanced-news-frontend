@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { mergeStyleSets, PrimaryButton, Spinner, Stack } from "@fluentui/react";
+import {
+  mergeStyleSets,
+  Persona,
+  PersonaSize,
+  PrimaryButton,
+  Spinner,
+  Stack,
+  TextField,
+} from "@fluentui/react";
 import { useParams } from "react-router-dom";
 
 import wires from "../../data/wires-all.json";
@@ -47,7 +55,8 @@ const Details: React.FunctionComponent = () => {
 
   const handleClick = async () => {
     setSleeping(true);
-    await sleep(5000);
+    await sleep(0);
+    // await sleep(5000);
     executeFetch();
     setSleeping(false);
   };
@@ -86,7 +95,7 @@ const Details: React.FunctionComponent = () => {
             <h3>More info</h3>
             <p dangerouslySetInnerHTML={{ __html: data.enhanced_info || "" }} />
           </section>
-          <section>
+          <section >
             <h3>Questions and sources</h3>
             <ul className={classNames.list}>
               {data.questions?.map((question, index) => (
@@ -112,6 +121,19 @@ const Details: React.FunctionComponent = () => {
               ))}
             </ul>
           </section>
+          <h3 className={classNames.loading}>Custom search</h3>
+          <Stack horizontal verticalAlign="center">
+            <Stack.Item>
+              <Persona
+                imageInitials="JP"
+                size={PersonaSize.size40}
+                imageAlt="Jörg Pfeiffer"
+              />
+            </Stack.Item>
+            <Stack.Item grow={true}>
+              <TextField placeholder="Type your own question ..." />
+            </Stack.Item>
+          </Stack>
           <section className={classNames.warning}>
             <em>
               ⚠️ Please make sure to double-check the generated content and
