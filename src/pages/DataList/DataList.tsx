@@ -32,15 +32,8 @@ const columns = [
     key: "headline",
     name: "Headline",
     fieldName: "headline",
-    minWidth: 100,
-    maxWidth: 200,
-  },
-  {
-    key: "teaser",
-    name: "Teaser",
-    fieldName: "teaser",
-    minWidth: 100,
-    maxWidth: 200,
+    minWidth: 200,
+    maxWidth: 400,
   },
   {
     key: "geosubject_names",

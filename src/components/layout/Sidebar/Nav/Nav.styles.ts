@@ -1,4 +1,4 @@
-import { AnimationClassNames, getFocusStyle, Theme } from "@fluentui/react";
+import { AnimationClassNames, getFocusStyle, positionCallout, Theme } from "@fluentui/react";
 
 export const getStyles = ({
   isSelected,
@@ -23,7 +23,7 @@ export const getStyles = ({
 
   const navFontSize = fonts.medium.fontSize;
   const navTextColor = semanticColors.menuItemText;
-  const navWidth = 280;
+  const navWidth = 180;
   const navCollapsedWidth = 48;
   const shortenedIconWidth = 32;
   const navFloatingWidth = 230;
