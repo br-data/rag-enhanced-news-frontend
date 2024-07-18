@@ -1,4 +1,4 @@
-import { AnimationClassNames, getFocusStyle, positionCallout, Theme } from "@fluentui/react";
+import { AnimationClassNames, getFocusStyle, Theme } from "@fluentui/react";
 
 export const getStyles = ({
   isSelected,

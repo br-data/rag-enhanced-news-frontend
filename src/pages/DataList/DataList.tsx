@@ -114,7 +114,7 @@ const DataList: React.FunctionComponent<DataListProps> = (props) => {
     // };
 
     // loadJSONData();
-  }, [props.route.key]);
+  }, [key, props.route.key]);
 
   const history = useHistory();
 

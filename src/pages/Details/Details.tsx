@@ -49,7 +49,7 @@ const Details: React.FunctionComponent = () => {
       );
       setBody({ meldung: wire?.article_html });
     }
-  }, [id]);
+  }, [id, wire]);
 
   const { data, loading, error, executeFetch } = useFetch<GenericResponse>(
     url,
