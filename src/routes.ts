@@ -13,14 +13,9 @@ export type Route = {
 };
 
 export const routes: Route = {
-  // key: "home",
-  // name: "Home",
-  // icon: "Home",
-  // path: "/",
-  // component: React.lazy(() => import("./pages/Dashboard/Dashboard")),
-  key: "overview",
-  name: "Overview",
-  icon: "Home",
+  key: "news",
+  name: "News",
+  icon: "News",
   path: "/",
   component: React.lazy(() => import("./pages/DataList/DataList")),
   children: [
@@ -38,7 +33,7 @@ export const routes: Route = {
     },
     {
       key: "wires",
-      name: "News Wires",
+      name: "Categories",
       icon: "visualizeApp",
       children: [
         {

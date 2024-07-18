@@ -1,5 +1,5 @@
-import React from "react";
-import wires from "../../data/wires.json";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   DetailsList,
   ConstrainMode,
@@ -12,7 +12,11 @@ import {
   IDetailsHeaderProps,
   IDetailsColumnRenderTooltipProps,
 } from "@fluentui/react";
-import { useHistory } from "react-router-dom"; // Assuming you're using react-router
+
+import wiresAll from "../../data/wires-all.json";
+import wiresWorld from "../../data/wires-world.json";
+import wiresGermany from "../../data/wires-germany.json";
+import wiresBavaria from "../../data/wires-bavaria.json";
 
 const columns = [
   {
@@ -69,7 +73,53 @@ const classNames = mergeStyleSets({
   },
 });
 
-const DataList: React.FunctionComponent = () => {
+interface DataListProps {
+  route: {
+    key: string;
+  };
+}
+
+const DataList: React.FunctionComponent<DataListProps> = (props) => {
+  interface GenericData {
+    [key: string]: any;
+  }
+
+  const [key, setKey] = useState(props.route.key);
+  const [data, setData] = useState<GenericData[] | undefined>();
+
+  useEffect(() => {
+    setKey(props.route.key);
+
+    switch (key) {
+      case "world":
+        setData(wiresWorld);
+        break;
+      case "germany":
+        setData(wiresGermany);
+        break;
+      case "bavaria":
+        setData(wiresBavaria);
+        break;
+      default:
+        setData(wiresAll);
+        break;
+    }
+
+    // // Dynamic JSON imports are still broke. Maybe this will work in the near feature.
+    // const loadJSONData = async () => {
+    //   try {
+    //     const data = await import(`../../data/wires-${key || "all"}.json`);
+    //     console.log(data.map((d: any) => d));
+    //     setData(JSON.parse(data));
+    //   } catch (err) {
+    //     console.error(err);
+    //     console.error(`Failed to load data for key: ${key}`);
+    //   }
+    // };
+
+    // loadJSONData();
+  }, [props.route.key]);
+
   const history = useHistory();
 
   const handleRowClick = (item: any) => {
@@ -96,23 +146,25 @@ const DataList: React.FunctionComponent = () => {
   };
 
   return (
-    <div>
-      <h1 className={classNames.header}>All News Wires</h1>
-      <DetailsList
-        styles={gridStyles}
-        items={wires}
-        columns={columns}
-        checkboxVisibility={CheckboxVisibility.always}
-        layoutMode={DetailsListLayoutMode.fixedColumns}
-        constrainMode={ConstrainMode.unconstrained}
-        selectionMode={SelectionMode.none}
-        onRenderDetailsHeader={onRenderDetailsHeader}
-        selectionPreservedOnEmptyClick
-        ariaLabelForSelectionColumn="Toggle selection"
-        ariaLabelForSelectAllCheckbox="Toggle selection for all items"
-        onItemInvoked={handleRowClick}
-      />{" "}
-    </div>
+    <>
+      <h1 className={classNames.header}>Latest News</h1>
+      {data && (
+        <DetailsList
+          styles={gridStyles}
+          items={data}
+          columns={columns}
+          checkboxVisibility={CheckboxVisibility.always}
+          layoutMode={DetailsListLayoutMode.fixedColumns}
+          constrainMode={ConstrainMode.unconstrained}
+          selectionMode={SelectionMode.none}
+          onRenderDetailsHeader={onRenderDetailsHeader}
+          selectionPreservedOnEmptyClick
+          ariaLabelForSelectionColumn="Toggle selection"
+          ariaLabelForSelectAllCheckbox="Toggle selection for all items"
+          onItemInvoked={handleRowClick}
+        />
+      )}
+    </>
   );
 };
 

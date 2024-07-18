@@ -55,7 +55,7 @@ export const Sidebar = () => {
         ? route.icon
         : hasChildren(route)
         ? "DocumentSet"
-        : "TextDocument",
+        : "Filter",
     };
   };
 

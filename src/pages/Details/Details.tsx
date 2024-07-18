@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { mergeStyleSets, PrimaryButton, Spinner, Stack } from "@fluentui/react";
 import { useParams } from "react-router-dom";
 
-import wires from "../../data/wires.json";
+import wires from "../../data/wires-all.json";
 import mockResponse from "../../data/response.json";
 import useFetch from "../../global/hooks/useFetch";
 
