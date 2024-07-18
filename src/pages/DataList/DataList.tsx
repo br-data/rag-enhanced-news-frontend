@@ -11,6 +11,8 @@ import {
   IRenderFunction,
   IDetailsHeaderProps,
   IDetailsColumnRenderTooltipProps,
+  DetailsRow,
+  IDetailsRowProps,
 } from "@fluentui/react";
 
 import wiresAll from "../../data/wires-all.json";
@@ -122,10 +124,6 @@ const DataList: React.FunctionComponent<DataListProps> = (props) => {
 
   const history = useHistory();
 
-  const handleRowClick = (item: any) => {
-    history.push(`/wires/details/${item.id}`);
-  };
-
   const onRenderDetailsHeader: IRenderFunction<IDetailsHeaderProps> = (
     props,
     defaultRender,
@@ -145,6 +143,24 @@ const DataList: React.FunctionComponent<DataListProps> = (props) => {
       : null;
   };
 
+  const onRenderRow = (props?: IDetailsRowProps): JSX.Element => {
+    if (props) {
+      return (
+        <div
+          onClick={() => handleRowClick(props.item)}
+          style={{ cursor: "pointer" }}
+        >
+          <DetailsRow {...props} />
+        </div>
+      );
+    }
+    return <div />;
+  };
+
+  const handleRowClick = (item: any) => {
+    history.push(`/wires/details/${item.id}`);
+  };
+
   return (
     <>
       <h1 className={classNames.header}>Latest News</h1>
@@ -158,10 +174,9 @@ const DataList: React.FunctionComponent<DataListProps> = (props) => {
           constrainMode={ConstrainMode.unconstrained}
           selectionMode={SelectionMode.none}
           onRenderDetailsHeader={onRenderDetailsHeader}
+          onRenderRow={onRenderRow}
           selectionPreservedOnEmptyClick
           ariaLabelForSelectionColumn="Toggle selection"
-          ariaLabelForSelectAllCheckbox="Toggle selection for all items"
-          onItemInvoked={handleRowClick}
         />
       )}
     </>

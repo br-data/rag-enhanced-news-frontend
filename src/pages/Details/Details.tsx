@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   mergeStyleSets,
+  MessageBar,
+  MessageBarType,
   Persona,
   PersonaSize,
   PrimaryButton,
@@ -49,12 +51,6 @@ const Details: React.FunctionComponent = () => {
     }
   }, [id]);
 
-  const [sleeping, setSleeping] = useState(false);
-
-  const sleep = (ms: number): Promise<void> => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
   const { data, loading, error, executeFetch } = useFetch<GenericResponse>(
     url,
     {
@@ -63,12 +59,15 @@ const Details: React.FunctionComponent = () => {
     },
   );
 
-  console.log("data", data);
+  const [sleeping, setSleeping] = useState(false);
+
+  const sleep = (ms: number): Promise<void> => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
 
   const handleClick = async () => {
     setSleeping(true);
-    await sleep(0);
-    // await sleep(5000);
+    await sleep(id === "demo" ? 5000 : 0);
     executeFetch();
     setSleeping(false);
   };
@@ -83,7 +82,7 @@ const Details: React.FunctionComponent = () => {
       borderLeft: "5px solid #0078d4",
     },
     list: { padding: "0", listStyle: "inside" },
-    warning: { margin: "2rem 0", backgroundColor: "#f4f4f4", padding: "1rem" },
+    warning: { margin: "2rem 0" },
   });
 
   return (
@@ -94,13 +93,17 @@ const Details: React.FunctionComponent = () => {
       {(sleeping || loading) && (
         <Stack className={classNames.loading}>
           <Spinner
-            label="Searching for possible text enrichments"
+            label="Searching for text enrichments"
             ariaLive="assertive"
             labelPosition="right"
           />
         </Stack>
       )}
-      {error && <p>Error: {error.message}</p>}
+      {error && (
+        <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
+          Error: {error.message}
+        </MessageBar>
+      )}
       {data && (
         <>
           <section className={classNames.enhancedInfo}>
@@ -143,15 +146,19 @@ const Details: React.FunctionComponent = () => {
               />
             </Stack.Item>
             <Stack.Item grow={true}>
-              <TextField placeholder="Type your own question ..." />
+              <TextField
+                placeholder="Type your own question ..."
+                iconProps={{ iconName: "Send" }}
+              />
             </Stack.Item>
           </Stack>
-          <section className={classNames.warning}>
-            <em>
-              ⚠️ Please make sure to double-check the generated content and
-              sources.
-            </em>
-          </section>
+          <MessageBar
+            className={classNames.warning}
+            messageBarType={MessageBarType.warning}
+            isMultiline={false}
+          >
+            Please make sure to double-check the generated content and sources.
+          </MessageBar>
         </>
       )}
       {!data && !loading && !sleeping && (
