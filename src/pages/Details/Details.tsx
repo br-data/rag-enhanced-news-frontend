@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   mergeStyleSets,
   Persona,
@@ -15,28 +15,39 @@ import mockResponse from "../../data/response.json";
 import useFetch from "../../global/hooks/useFetch";
 
 const Details: React.FunctionComponent = () => {
+  interface GenericResponse {
+    Hintergrund: any;
+    questions_and_answers: any[];
+  }
+
+  interface GenericRequest {
+    [key: string]: any;
+  }
+
   interface RouteParams {
     id: string;
   }
 
   const { id } = useParams<RouteParams>();
   const wire = wires.find((item) => item.id === id);
+  const [url, setUrl] = useState<string>(
+    "http://accio.germanywestcentral.cloudapp.azure.com:8000/generate-enriched-report",
+  );
+  const [body, setBody] = useState<GenericRequest>(mockResponse);
 
-  interface GenericData {
-    [key: string]: any;
-  }
-
-  interface Response {
-    id: string;
-    headline: string;
-    enhanced_info: string;
-    questions?: Questions[] | null;
-  }
-
-  interface Questions {
-    question: string;
-    links?: string[] | null;
-  }
+  useEffect(() => {
+    if (id === "demo") {
+      setUrl(
+        "https://br24-geschichten-function.azurewebsites.net/api/Repeater?code=hwgMw21CRcLF_6DZve8hFWqKnzDst2NzrdAwztrObka4AzFuo0_gKg%3D%3D",
+      );
+      setBody(mockResponse);
+    } else {
+      setUrl(
+        "http://accio.germanywestcentral.cloudapp.azure.com:8000/generate-enriched-report",
+      );
+      setBody({ meldung: wire?.article_html });
+    }
+  }, [id]);
 
   const [sleeping, setSleeping] = useState(false);
 
@@ -44,14 +55,15 @@ const Details: React.FunctionComponent = () => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   };
 
-  const url =
-    "https://br24-geschichten-function.azurewebsites.net/api/Repeater?code=hwgMw21CRcLF_6DZve8hFWqKnzDst2NzrdAwztrObka4AzFuo0_gKg%3D%3D";
-  const body: GenericData = mockResponse;
+  const { data, loading, error, executeFetch } = useFetch<GenericResponse>(
+    url,
+    {
+      method: "POST",
+      body,
+    },
+  );
 
-  const { data, loading, error, executeFetch } = useFetch<Response>(url, {
-    method: "POST",
-    body,
-  });
+  console.log("data", data);
 
   const handleClick = async () => {
     setSleeping(true);
@@ -93,29 +105,29 @@ const Details: React.FunctionComponent = () => {
         <>
           <section className={classNames.enhancedInfo}>
             <h3>More info</h3>
-            <p dangerouslySetInnerHTML={{ __html: data.enhanced_info || "" }} />
+            <p dangerouslySetInnerHTML={{ __html: data.Hintergrund || "" }} />
           </section>
-          <section >
+          <section>
             <h3>Questions and sources</h3>
             <ul className={classNames.list}>
-              {data.questions?.map((question, index) => (
+              {data.questions_and_answers?.map((question, index) => (
                 <li key={`question-${index}`}>
                   {question.question} (
-                  {question.links?.length
-                    ? question.links?.map((link, index) => (
-                        <>
-                          <a
-                            key={`link-${index}`}
-                            href={link}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Source {index + 1}
-                          </a>
-                          {index === question.links!.length - 1 ? "" : ", "}
-                        </>
-                      ))
-                    : "No sources"}
+                  {question.links &&
+                    question.links?.length &&
+                    question.links?.map((link: string, index: number) => (
+                      <>
+                        <a
+                          key={`link-${index}`}
+                          href={link}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Source {index + 1}
+                        </a>
+                        {index === question.links!.length - 1 ? "" : ", "}
+                      </>
+                    ))}
                   )
                 </li>
               ))}
