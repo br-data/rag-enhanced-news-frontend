@@ -19,8 +19,8 @@ const columns = [
     key: "created_at",
     name: "Date",
     fieldName: "created_at",
-    minWidth: 50,
-    maxWidth: 100,
+    minWidth: 100,
+    maxWidth: 150,
   },
   {
     key: "headline",
