@@ -71,6 +71,7 @@ const classNames = mergeStyleSets({
 interface DataListProps {
   route: {
     key: string;
+    name: string;
   };
 }
 
@@ -156,7 +157,7 @@ const DataList: React.FunctionComponent<DataListProps> = (props) => {
 
   return (
     <>
-      <h1 className={classNames.header}>Latest News</h1>
+      <h1 className={classNames.header}>{props.route.name}</h1>
       {data && (
         <DetailsList
           styles={gridStyles}

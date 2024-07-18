@@ -14,7 +14,7 @@ export type Route = {
 
 export const routes: Route = {
   key: "news",
-  name: "News",
+  name: "Latest News",
   icon: "News",
   path: "/",
   component: React.lazy(() => import("./pages/DataList/DataList")),
@@ -80,12 +80,20 @@ export const routes: Route = {
           icon: "Settings",
           children: [
             {
-              key: "list",
-              name: "List",
+              key: "categories",
+              name: "Categories",
             },
             {
-              key: "unit",
-              name: "Unit",
+              key: "models",
+              name: "Models",
+            },
+            {
+              key: "news-sources",
+              name: "News Sources",
+            },
+            {
+              key: "archive-sources",
+              name: "Archive Sources",
             },
           ],
         },
