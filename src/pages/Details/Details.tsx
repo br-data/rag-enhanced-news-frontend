@@ -92,16 +92,21 @@ const Details: React.FunctionComponent = () => {
               {data.questions?.map((question, index) => (
                 <li key={`question-${index}`}>
                   {question.question} (
-                  {question.links?.map((link, index) => (
-                    <a
-                      key={`link-${index}`}
-                      href={link}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Quelle {index + 1}
-                    </a>
-                  ))}
+                  {question.links?.length
+                    ? question.links?.map((link, index) => (
+                        <>
+                          <a
+                            key={`link-${index}`}
+                            href={link}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Source {index + 1}
+                          </a>
+                          {index === question.links!.length - 1 ? "" : ", "}
+                        </>
+                      ))
+                    : "No sources"}
                   )
                 </li>
               ))}

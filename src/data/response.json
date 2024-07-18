@@ -11,20 +11,29 @@
 
     {
       "question": "Gab es in der Vergangenheit schon Verlängerungen des Oktoberfests?",
-      "links": ["https://br24.de"]
+      "links": [
+        "https://www.br.de/nachrichten/bayern/zwei-tage-zusaetzlich-oktoberfest-dauert-2023-laenger,TLTW48s"
+      ]
     },
     {
       "question": "Welche Faktoren beeinflussen die Besucherzahlen des Oktoberfests?",
-      "links": ["https://br24.de"]
+      "links": []
     },
 
     {
       "question": "Wie hat die Pandemie das Oktoberfest beeinflusst?",
-      "links": ["https://br24.de"]
+      "links": [
+        "https://www.br.de/nachrichten/wissen/oktoberfest-2022-wie-gefaehrlich-ist-die-wiesn-wegen-corona,TDSjPZP",
+        "https://www.br.de/nachrichten/bayern/corona-rueckkehr-infektiologen-geben-entwarnung-zum-oktoberfest,TpWLVQ0"
+      ]
     },
     {
       "question": "Welche Sicherheitsmaßnahmen werden auf dem Oktoberfest umgesetzt??",
-      "links": ["https://br24.de"]
+      "links": [
+        "https://www.br.de/nachrichten/bayern/sicher-auf-der-wiesn-safe-space-bisher-fast-150-mal-genutzt,TqruUKy",
+        "https://www.br.de/nachrichten/bayern/oktoberfest-faq-was-man-fuer-den-wiesnfestbesuch-wissen-sollte,TplEsH3",
+        "https://www.br.de/nachrichten/bayern/so-soll-fuer-sicherheit-auf-der-wiesn-gesorgt-werden,TpfwIOI"
+      ]
     }
   ]
 }
