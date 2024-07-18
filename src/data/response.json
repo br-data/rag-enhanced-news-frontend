@@ -1,14 +1,30 @@
 {
-  "response": {
-    "id": "",
-    "headline": "",
-    "enhanced_info": "",
-    "questions": [
-      {
-        "question": "",
-        "answer": "",
-        "links": []
-      }
-    ]
-  }
+  "id": "e20a6a4d-7aa0-4411-8186-8b0d7ec5f0db",
+  "enhanced_info": "<p>Das Oktoberfest, auch Wiesn genannt, ist das <a href='https://www.br.de/nachrichten/oktoberfest-in-muenchen-alle-infos-und-nachrichten,RVoVsCy'>größte Volksfest der Welt</a> und findet seit 1810 auf der Theresienwiese in München statt. Es zieht jährlich Millionen von Besuchern an, sowohl aus Deutschland als auch international. Die Veranstaltung ist ein bedeutender Wirtschaftsfaktor für München und Bayern. Laut Angaben der Stadt München generiert das Oktoberfest einen wirtschaftlichen Nutzen von über einer Milliarde Euro pro Jahr. Dies umfasst Ausgaben für Unterkünfte, Gastronomie, Einzelhandel und Dienstleistungen.</p>Die <a href='https://www.br.de/nachrichten/bayern/zwei-tage-zusaetzlich-oktoberfest-dauert-2023-laenger,TLTW48s'>Verlängerung des Oktoberfests 2023</a> um zwei Tage ist nicht die erste ihrer Art. Bereits in den Jahren 1994 und 2010 wurde das Fest aufgrund von Feiertagen verlängert. Die Entscheidung zur Verlängerung wird in der Regel von der Stadt München getroffen und basiert auf unterschiedlichen Faktoren, darunter das Besucheraufkommen und die wirtschaftlichen Vorteile.<p>Denn die Besucherzahlen des Oktoberfests schwanken von Jahr zu Jahr. Neben der Dauer des Fests spielen auch das Wetter und globale Ereignisse eine Rolle. So verzeichnete das Oktoberfest 2019 etwa 6,3 Millionen Besucher, <a href='https://www.br.de/nachrichten/bayern/Absage-oktoberfest-2021-findet-nicht-statt-ein-br24-live,SWLCMBf'> während es 2020 und 2021 aufgrund der Covid-19-Pandemie komplett abgesagt wurde</a>. Die Pandemie hatte erhebliche Auswirkungen auf die globale Veranstaltungsbranche.</p><p><a href='https://www.br.de/nachrichten/bayern/so-soll-fuer-sicherheit-auf-der-wiesn-gesorgt-werden,TpfwIOI'>Ein weiterer Faktor, der die Besucherzahlen beeinflusst, ist die Sicherheit</a>. In den vergangenen Jahren wurden die Sicherheitsmaßnahmen auf dem Oktoberfest erheblich verstärkt. Dazu gehören erhöhte Polizeipräsenz, Videoüberwachung und strengere Einlasskontrollen. Diese Maßnahmen wurden in Reaktion auf globale Sicherheitsbedrohungen und spezifische Vorfälle in Deutschland eingeführt.</p>",
+  "questions": [
+    {
+      "question": "Wie entwickelt sich die Wirtschaft durch das Oktoberfest?",
+      "links": [
+        "https://www.br.de/nachrichten/wirtschaft/milliardengeschaeft-oktoberfest-wer-verdient-daran-mit,TrEaGiU"
+      ]
+    },
+
+    {
+      "question": "Gab es in der Vergangenheit schon Verlängerungen des Oktoberfests?",
+      "links": ["https://br24.de"]
+    },
+    {
+      "question": "Welche Faktoren beeinflussen die Besucherzahlen des Oktoberfests?",
+      "links": ["https://br24.de"]
+    },
+
+    {
+      "question": "Wie hat die Pandemie das Oktoberfest beeinflusst?",
+      "links": ["https://br24.de"]
+    },
+    {
+      "question": "Welche Sicherheitsmaßnahmen werden auf dem Oktoberfest umgesetzt??",
+      "links": ["https://br24.de"]
+    }
+  ]
 }
