@@ -1,5 +1,5 @@
 import React from "react";
-import items from "./data.json";
+import wires from "../../data/wires.json";
 import {
   DetailsList,
   ConstrainMode,
@@ -100,7 +100,7 @@ const DataList: React.FunctionComponent = () => {
       <h1 className={classNames.header}>All News Wires</h1>
       <DetailsList
         styles={gridStyles}
-        items={items}
+        items={wires}
         columns={columns}
         checkboxVisibility={CheckboxVisibility.always}
         layoutMode={DetailsListLayoutMode.fixedColumns}
