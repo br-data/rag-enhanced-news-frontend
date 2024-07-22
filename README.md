@@ -1,4 +1,4 @@
-# Accio: RAG-enhanced News (Frontend)
+# Accio – RAG-Enhanced News (Frontend)
 
 The prototype demonstrates how Retrieval-Augmented Generation ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)) can enhance news by incorporating additional content from a news archive. The aim is to better address the questions and needs of different user personas, providing more comprehensive and contextual information.
 

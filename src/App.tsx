@@ -26,8 +26,10 @@ const generateRoutePath = (node: Node, parent?: Node) => {
   const routePath = get(
     node,
     pathName,
-    join([parentPath, node[keyName]], "/"),
-  ).replace(/\/+/g, "/");
+    join([`.${parentPath}`, node[keyName]], "/"),
+  )
+    .replace(/\/+/g, "/")
+    .replace(/[.]+/g, ".");
 
   node[uniqueKeyName] = uniqueKey;
   node[pathName] = routePath;
@@ -41,7 +43,6 @@ const renderRoute = (route: Node): React.ReactNode[] => {
       : ComingSoon
     : route.component;
 
-  // Check authorization for every route
   const routeComponent = (
     <AuthorizedRoute
       id={route.key}
@@ -78,7 +79,7 @@ const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const flatRouteComponents = flattenDeep(routeComponents);
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <AutoSwitchLayout>
         <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
           <Switch>

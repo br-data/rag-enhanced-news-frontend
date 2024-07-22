@@ -1,6 +1,6 @@
 {
-  "short_name": "Accio – Enhance Your News",
-  "name": " RAG-enhanced news for tailored, contextual story delivery.",
+  "short_name": "Accio – Enhanced News",
+  "name": "Add context to your news with Retrieval-Augmented Generation",
   "icons": [
     {
       "src": "favicon.ico",
