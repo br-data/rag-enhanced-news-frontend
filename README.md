@@ -7,7 +7,9 @@ The prototype demonstrates how Retrieval-Augmented Generation ([RAG](https://en.
 
 The application was created for the [AI for Media Hackathon 2024](https://aiformedia.network/apply-for-our-generative-ai-hackathon/), hosted by Bayerischer Rundfunk, pub and Microsoft.
 
-The frontend for Accio was built with [Create React App](https://github.com/facebook/create-react-app) and [Fluent UI Starter](https://github.com/siminture/fluentui-starter). The code and documentation can be found: <https://github.com/br-data/rag-enhanced-news-backend>
+The frontend for Accio was built with [Create React App](https://github.com/facebook/create-react-app) and [Fluent UI Starter](https://github.com/siminture/fluentui-starter).
+
+The code and documentation for the RAG-backend service (FastAPI, LangChain) can be found here: <https://github.com/br-data/rag-enhanced-news-backend>
 
 ## Screenshots
 
