@@ -33,15 +33,13 @@ const Details: React.FunctionComponent = () => {
   const { id } = useParams<RouteParams>();
   const wire = wires.find((item) => item.id === id);
   const [url, setUrl] = useState<string>(
-    "http://accio.germanywestcentral.cloudapp.azure.com:8000/generate-enriched-report",
+    "https://europe-west3-brdata-live.cloudfunctions.net/echo",
   );
   const [body, setBody] = useState<GenericRequest>(mockResponse);
 
   useEffect(() => {
     if (id === "demo") {
-      setUrl(
-        "https://br24-geschichten-function.azurewebsites.net/api/Repeater?code=hwgMw21CRcLF_6DZve8hFWqKnzDst2NzrdAwztrObka4AzFuo0_gKg%3D%3D",
-      );
+      setUrl("https://europe-west3-brdata-live.cloudfunctions.net/echo");
       setBody(mockResponse);
     } else {
       setUrl(

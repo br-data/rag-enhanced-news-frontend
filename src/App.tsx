@@ -18,8 +18,6 @@ const keyName = "key";
 const pathName = "path";
 const uniqueKeyName = "uniqueKey";
 
-console.log("basename", basename);
-
 const generateRoutePath = (node: Node, parent?: Node) => {
   const parentUniqueKey = get(parent, uniqueKeyName);
   const uniqueKey = parentUniqueKey
@@ -79,12 +77,6 @@ const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const routeList = hierarchize(routes, undefined, generateRoutePath);
   const routeComponents = renderRoute(routeList);
   const flatRouteComponents = flattenDeep(routeComponents);
-
-  console.log(
-    "flatRouteComponents",
-    // @ts-ignore
-    flatRouteComponents.map((c) => c.props.path),
-  );
 
   return (
     <BrowserRouter basename={basename}>
