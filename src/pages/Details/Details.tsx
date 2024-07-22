@@ -81,7 +81,7 @@ const Details: React.FunctionComponent = () => {
       paddingLeft: "15px",
       borderLeft: "5px solid #0078d4",
     },
-    list: { padding: "0", listStyle: "inside" },
+    list: { padding: "4px", listStyle: "inside" },
     warning: { margin: "2rem 0" },
   });
 
@@ -107,7 +107,7 @@ const Details: React.FunctionComponent = () => {
       {data && (
         <>
           <section className={classNames.enhancedInfo}>
-            <h3>More info</h3>
+            <h3>Generated info</h3>
             <p dangerouslySetInnerHTML={{ __html: data.Hintergrund || "" }} />
           </section>
           <section>

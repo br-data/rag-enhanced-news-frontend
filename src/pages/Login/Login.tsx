@@ -169,10 +169,13 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
               <PrimaryButton type="submit">Login</PrimaryButton>
             </Stack>
             <Stack>
-              <h3>Demo users</h3>
-              <ul>
-                <li>demo/demo</li>
-                <li>admin/admin</li>
+              <h3 className={classNames.demoHeadline}>Demo users</h3>
+              <ul className={classNames.demoList}>
+                {demoUsers.map((user) => (
+                  <li key={user.username}>
+                    {user.displayName} ({user.username}/{user.password})
+                  </li>
+                ))}
               </ul>
             </Stack>
             {error && (
@@ -225,6 +228,13 @@ const getStyles = ({ theme }: { theme: Theme }) => {
     title: {
       ...theme.fonts.xxLarge,
       marginTop: 0,
+    },
+    demoHeadline: {
+      marginBottom: 0,
+    },
+    demoList: {
+      paddingLeft: theme.spacing.s2,
+      listStyle: "inside",
     },
   };
 };

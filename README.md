@@ -1,6 +1,6 @@
-# RAG-enhanced News Wires („Accio“)
+# Accio: RAG-enhanced News (Frontend)
 
-The Accio prototype demonstrates how Retrieval-Augmented Generation (RAG) can enhance news wires by incorporating additional content from a news archive. The aim is to better address the questions and needs of different user personas, providing more comprehensive and contextual information.
+The prototype demonstrates how Retrieval-Augmented Generation (RAG) can enhance news by incorporating additional content from a news archive. The aim is to better address the questions and needs of different user personas, providing more comprehensive and contextual information.
 
 The application was created for the [AI for Media Hackathon 2024](https://aiformedia.network/apply-for-our-generative-ai-hackathon/), hosted by Bayerischer Rundfunk, pub and Microsoft.
 

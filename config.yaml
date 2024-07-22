@@ -1,0 +1,7 @@
+isEnabled: true
+build:
+  command: yarn && yarn build
+  outputFolder: build
+settings:
+  type: website
+  projectName: accio

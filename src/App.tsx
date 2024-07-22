@@ -41,6 +41,7 @@ const renderRoute = (route: Node): React.ReactNode[] => {
       : ComingSoon
     : route.component;
 
+  // Check authorization for every route
   const routeComponent = (
     <AuthorizedRoute
       id={route.key}
