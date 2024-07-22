@@ -12,10 +12,13 @@ import {
 import { hierarchize, Node } from "./global/hierarchical";
 import { routes } from "./routes";
 
-const basePath = process.env.PUBLIC_URL;
+const basename =
+  process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "/";
 const keyName = "key";
 const pathName = "path";
 const uniqueKeyName = "uniqueKey";
+
+console.log("basename", basename);
 
 const generateRoutePath = (node: Node, parent?: Node) => {
   const parentUniqueKey = get(parent, uniqueKeyName);
@@ -77,17 +80,14 @@ const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const routeComponents = renderRoute(routeList);
   const flatRouteComponents = flattenDeep(routeComponents);
 
-  // @ts-ignore
-  console.log("flatRouteComponents", flatRouteComponents.map((c) => c.props.path));
-
-  // const fixedRouteComponents = flatRouteComponents.map(
-  //   (component, index) => {
-  //     component.props.
-  //   },
-  // );
+  console.log(
+    "flatRouteComponents",
+    // @ts-ignore
+    flatRouteComponents.map((c) => c.props.path),
+  );
 
   return (
-    <BrowserRouter basename={basePath}>
+    <BrowserRouter basename={basename}>
       <AutoSwitchLayout>
         <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
           <Switch>
