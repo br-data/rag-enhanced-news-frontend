@@ -12,6 +12,7 @@ import {
 import { hierarchize, Node } from "./global/hierarchical";
 import { routes } from "./routes";
 
+const basePath = process.env.PUBLIC_URL;
 const keyName = "key";
 const pathName = "path";
 const uniqueKeyName = "uniqueKey";
@@ -26,10 +27,8 @@ const generateRoutePath = (node: Node, parent?: Node) => {
   const routePath = get(
     node,
     pathName,
-    join([`.${parentPath}`, node[keyName]], "/"),
-  )
-    .replace(/\/+/g, "/")
-    .replace(/[.]+/g, ".");
+    join([`${parentPath}`, node[keyName]], "/"),
+  ).replace(/\/+/g, "/");
 
   node[uniqueKeyName] = uniqueKey;
   node[pathName] = routePath;
@@ -78,8 +77,17 @@ const App: React.FunctionComponent<AppProps> = ({ theme }) => {
   const routeComponents = renderRoute(routeList);
   const flatRouteComponents = flattenDeep(routeComponents);
 
+  // @ts-ignore
+  console.log("flatRouteComponents", flatRouteComponents.map((c) => c.props.path));
+
+  // const fixedRouteComponents = flatRouteComponents.map(
+  //   (component, index) => {
+  //     component.props.
+  //   },
+  // );
+
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={basePath}>
       <AutoSwitchLayout>
         <Suspense fallback={<ProgressIndicator label="Page loading..." />}>
           <Switch>

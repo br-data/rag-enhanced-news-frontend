@@ -16,7 +16,7 @@ export const routes: Route = {
   key: "news",
   name: "Latest News",
   icon: "News",
-  path: "/",
+  path: "./",
   component: React.lazy(() => import("./pages/DataList/DataList")),
   children: [
     {
