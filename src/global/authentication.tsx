@@ -1,14 +1,32 @@
 import React from "react";
 import { useSessionStorage } from "react-use";
 
-const defaultValues = {
-  isAuthenticated: false as boolean,
-  principal: null,
+export const demoUsers = [
+  {
+    username: "demo",
+    password: "demo",
+    roles: ["user"],
+    displayName: "Demo",
+  },
+  {
+    username: "admin",
+    password: "admin",
+    roles: ["admin"],
+    displayName: "Admin",
+  },
+];
+
+// Warning: Authentication is currently disabled
+export const defaultValues = {
+  // isAuthenticated: false ,
+  // principal: null,
+  isAuthenticated: true,
+  principal: demoUsers[0],
   login: (principal: any) => {},
   logout: () => {},
 };
 
-const STOREGE_KEY = "authentication";
+const STORAGE_KEY = "authentication";
 
 export const AuthenticationContext = React.createContext(defaultValues);
 
@@ -20,7 +38,7 @@ export const AuthenticationProvider: React.FunctionComponent<
   AuthenticationProviderProps
 > = ({ children }) => {
   const [authentication, setAuthentication] = useSessionStorage(
-    STOREGE_KEY,
+    STORAGE_KEY,
     defaultValues,
   );
 

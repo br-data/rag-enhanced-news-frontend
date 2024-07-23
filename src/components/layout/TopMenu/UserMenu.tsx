@@ -30,8 +30,7 @@ export const UserMenu: React.FunctionComponent = () => {
       menuProps={menuProps}
       iconProps={{ iconName: "UserOptional" }}
     >
-      {/* @ts-ignore Principal */}
-      {principal.username}
+      {principal ? principal.displayName : "Demo"}
     </CommandBarButton>
   );
 };

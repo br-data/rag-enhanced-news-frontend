@@ -33,3 +33,16 @@ Ideally, different personas could be selected and updated by the news editors, d
 The project requires [Node.js](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) to run locally.
 
 The development server runs on <http://localhost:3000/>
+
+## Authentication
+
+The login is currently disabled in the [authentication provider](./src/global/authentication.tsx). To enable authentication set default values as following:
+
+```tsx
+export const defaultValues = {
+  isAuthenticated: false,
+  principal: null,
+  login: (principal: any) => {},
+  logout: () => {},
+};
+```

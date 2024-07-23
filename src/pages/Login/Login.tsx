@@ -21,22 +21,7 @@ import {
 } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 import { ThemeToggle } from "../../global/themes";
-import { useAuthentication } from "../../global/authentication";
-
-const demoUsers = [
-  {
-    username: "admin",
-    password: "admin",
-    roles: ["admin"],
-    displayName: "Admin User",
-  },
-  {
-    username: "demo",
-    password: "demo",
-    roles: ["user"],
-    displayName: "Demo User",
-  },
-];
+import { useAuthentication, demoUsers } from "../../global/authentication";
 
 const getClassNames = classNamesFunction();
 
